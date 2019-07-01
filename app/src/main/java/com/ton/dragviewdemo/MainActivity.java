@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(MainActivity.this));
         setContentView(R.layout.activity_main);
         mDragView = (DragView) findViewById(R.id.dragview);
+
+        mDragView.setInitalElements(200,null,null,3000);
+
 //        mDragView.setImageResource(R.mipmap.dragon_y,R.mipmap.dragon_label_y);
         mDragView.setImageUrl("http://hyy12345678.uicp.net:8666/wp-content/uploads/2019/06/dragon_z.png",
                 "http://hyy12345678.uicp.net:8666/wp-content/uploads/2019/06/dragon_label_z.png");

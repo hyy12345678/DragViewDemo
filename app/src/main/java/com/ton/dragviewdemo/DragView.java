@@ -35,7 +35,7 @@ public class DragView extends View {
     private int WIDTH = 160;
     private int HEIGHT = 160;
     private int heigh, width;
-    private Rect rect = new Rect(0, 0, WIDTH, WIDTH);//绘制矩形的区域
+    private Rect rect = new Rect(0, 0, WIDTH, HEIGHT);//绘制矩形的区域
     private int deltaX, deltaY;//点击位置和图形边界的偏移量
     private static Paint paint = new Paint();//画笔
     private Bitmap mBitmap = null;
@@ -52,6 +52,8 @@ public class DragView extends View {
 
     private int DELAY_TIME = 8000;
 
+    private int init_y = -1;
+
     public DragView(Context context, AttributeSet attrs) {
         super(context, attrs);
         WIDTH = 137;
@@ -67,7 +69,13 @@ public class DragView extends View {
         setMeasuredDimension(widthSize, heightSize);
         width = widthSize;
         heigh = heightSize;
-        rect = new Rect(width - WIDTH, heigh / 2 - HEIGHT / 2, width, heigh / 2 + HEIGHT / 2);//绘制矩形的区域
+//        rect = new Rect(width - WIDTH, heigh / 2 - HEIGHT / 2, width, heigh / 2 + HEIGHT / 2);//绘制矩形的区域
+
+        if(init_y < 0){
+            init_y = heigh / 2;
+        }
+
+        rect = new Rect(width - WIDTH, init_y - HEIGHT / 2, width, init_y + HEIGHT / 2);//绘制矩形的区域
     }
 
     /**
@@ -278,6 +286,29 @@ public class DragView extends View {
     @Override
     public void setOnClickListener(OnClickListener l) {
         this.mClickListener = l;
+    }
+
+
+    public void setInitalElements(Integer y,Integer WIDTH,Integer HEIGHT,Integer DELAY_TIME){
+
+        if(y != null){
+            this.init_y = y;
+        }
+
+        if(WIDTH != null){
+            this.WIDTH = WIDTH;
+        }
+
+        if(HEIGHT != null){
+            this.HEIGHT = HEIGHT;
+        }
+
+        if(DELAY_TIME != null){
+            this.DELAY_TIME = DELAY_TIME;
+        }
+
+        invalidate();
+
     }
 
     /***
